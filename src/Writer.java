@@ -11,7 +11,7 @@ public class Writer {
         try{
             FileWriter fileWriter = new FileWriter(fileOUT);
             BufferedWriter out = new BufferedWriter(fileWriter);
-            out.write(commands.size());
+            out.write(Integer.toString(commands.size()));
             out.write('\n');
             for(Command command: commands) {
                 switch (command.getType()) {
