@@ -12,6 +12,7 @@ public class Writer {
             FileWriter fileWriter = new FileWriter(fileOUT);
             BufferedWriter out = new BufferedWriter(fileWriter);
             out.write(commands.size());
+            out.write('\n');
             for(Command command: commands) {
                 switch (command.getType()) {
                     case PAINT_LINE:
@@ -25,7 +26,7 @@ public class Writer {
                         out.write("ERASE_CELL " + command.getParams()[0] +" "+ command.getParams()[1]);
                         break;
                 }
-
+                out.write('\n');
             }
             out.close();
         }catch (Exception e){

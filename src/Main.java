@@ -9,8 +9,16 @@ public class Main {
 
     public static void main(String[] args) {
         originMap = Reader.readMap("Example/logo.in");
-        showMap(originMap);
-        Writer.writeCommandsToFile("Example/logo.out", analyze(originMap));
+//        showMap(originMap);
+        ArrayList<Command> commands = new ArrayList<>();
+        commands.add(new Command(Command.CommandType.PAINT_SQUARE, 3,4,2));
+        commands.add(new Command(Command.CommandType.PAINT_LINE, 6,7,6,15));
+        commands.add(new Command(Command.CommandType.PAINT_LINE, 6,7,10,7));
+        commands.add(new Command(Command.CommandType.PAINT_LINE, 10,10,10,10));
+        commands.add(new Command(Command.CommandType.PAINT_SQUARE, 11,11,0));
+        commands.add(new Command(Command.CommandType.ERASE_CELL, 3, 4));
+        showMap(createMapFromCommands(commands));
+        Writer.writeCommandsToFile("Example/logo.out", commands);
     }
 
     //todo CREATE your algorithm HERE
@@ -58,12 +66,12 @@ public class Main {
                     int x2 = command.getParams()[2];
                     int y2 = command.getParams()[3];
                     if (x1 == x2) {
-                        for (int i = y1; i < y2; i++) {
+                        for (int i = y1; i < y2 + 1; i++) {
                             result[x1][i] = true;
                         }
                     } else {
                         if (y1 == y2) {
-                            for (int i = x1; i < x2; i++) {
+                            for (int i = x1; i < x2 + 1; i++) {
                                 result[i][y1] = true;
                             }
                         } else {
@@ -75,8 +83,8 @@ public class Main {
                     int cX = command.getParams()[0];
                     int cY = command.getParams()[1];
                     int S = command.getParams()[2];
-                    for (int i = cX - S; i < cX + S; i++) {
-                        for (int j = cY - S; j < cY + S; j++) {
+                    for (int i = cX - S; i < cX + S + 1; i++) {
+                        for (int j = cY - S; j < cY + S + 1; j++) {
                             result[i][j] = true;
                         }
                     }
